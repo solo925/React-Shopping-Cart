@@ -9,33 +9,36 @@ export const ShoppingCartContext = createContext(null);
 
 function ShoppingCartProvider({ children }) {
 
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [listOfProducts, setListOfProducts] = useState([]);
 
     async function fetchListOfProducts() {
-        try {
-            const apiResponse = await fetch("https://dumyjson.com/products");
-            const result = await apiResponse.json()
 
-            if (result && result?.products) {
-                setListOfProducts(result?.products);  
-            }
-        } catch (e) {
-            console.log(e); 
+        const apiResponse = await fetch('https://dummyjson.com/products');
+        const result = await apiResponse.json();  
+
+        // console.log(result?.products);
+
+        if (result && result?.products) {
+            setListOfProducts(result?.products);
+            setLoading(false);
         }
-
-        // return
-
-
         
+             
     }
+    
+    // console.log(listOfProducts);
+    
 
     useEffect(() => {
         fetchListOfProducts()
     }, [])
+
+    // console.log(listOfProducts);
+    
     
     return (
-        <ShoppingCartContext.Provider value={{}}>
+        <ShoppingCartContext.Provider value={{listOfProducts,loading}}>
             {children}
         </ShoppingCartContext.Provider>
     )
