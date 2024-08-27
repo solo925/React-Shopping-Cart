@@ -11,6 +11,7 @@ function ShoppingCartProvider({ children }) {
 
     const [loading, setLoading] = useState(true);
     const [listOfProducts, setListOfProducts] = useState([]);
+    const [productDetails, setProductDetails] = useState(null);
 
     async function fetchListOfProducts() {
 
@@ -38,7 +39,16 @@ function ShoppingCartProvider({ children }) {
     
     
     return (
-        <ShoppingCartContext.Provider value={{listOfProducts,loading}}>
+        <ShoppingCartContext.Provider value={
+            {
+                listOfProducts,
+                loading,
+                setLoading,
+                productDetails,
+                // setListOfProducts,
+                setProductDetails
+            }
+        }>
             {children}
         </ShoppingCartContext.Provider>
     )
