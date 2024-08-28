@@ -10,3 +10,5 @@ Currently, two official plugins are available:
 # React-Shopping-Cart
 
 ![image1 items list](im1.png)
+![alt text](image.png)
+![alt text](image-1.png)
