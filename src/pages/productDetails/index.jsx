@@ -4,7 +4,7 @@ import { ShoppingCartContext } from '../../context';
 
 function ProductDetailPage() {
 
-  const { productDetails, setProductDetails, setLoading, loading } = useContext(ShoppingCartContext);
+  const { productDetails, setProductDetails, setLoading, loading ,handleAddToCart} = useContext(ShoppingCartContext);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -24,10 +24,6 @@ function ProductDetailPage() {
     }
   }
 
-  function handleGoToCart() {
-    navigate('/cart')
-    
-  }
 
   useEffect(() => {
     fetchProductDetails();
@@ -71,7 +67,7 @@ function ProductDetailPage() {
               <p className='text-xl font-bold'>${productDetails?.price}</p>
             </div>
             <div>
-              <button onClick={handleGoToCart}
+              <button onClick={()=>handleAddToCart(productDetails)}
                 className='mt-5 min-w-[200px] px-4 py-3 border border-[#333] bg-transparent text-sm text-semibold rounded'>
                 Add to cart
               </button>
