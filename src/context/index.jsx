@@ -48,33 +48,6 @@ function ShoppingCartProvider({ children }) {
     }
 
 
-    // function handleAddToCart(getProductDetails) {
-    //     setCartItem((prevCartItems) => {
-    //         // Create a copy of the previous state
-    //         let updatedCartItems = [...prevCartItems];
-            
-    //         // Check if the current product is already added to the cart
-    //         const findIndexOfCurrentItem = updatedCartItems.findIndex(cartItem => cartItem.id === getProductDetails.id);
-            
-    //         if (findIndexOfCurrentItem === -1) {
-    //             // If item is not in the cart, add it
-    //             updatedCartItems.push({
-    //                 ...getProductDetails,
-    //                 quantity: 1,
-    //                 totalprice: getProductDetails?.price
-    //             });
-    //         } else {
-    //             console.log('do something');
-    //         }
-    
-    //         // Save to localStorage
-    //         localStorage.setItem('cartitems', JSON.stringify(updatedCartItems));
-    //         console.log(cartItem);
-            
-    //         // Return the updated cart items to set the new state
-    //         return updatedCartItems;
-    //     });
-    // }
     
 
     async function fetchListOfProducts() {
@@ -97,6 +70,7 @@ function ShoppingCartProvider({ children }) {
 
     useEffect(() => {
         fetchListOfProducts()
+        setCartItem(JSON.parse(localStorage.getItem('cartitems') || []))
     }, [])
 
     // console.log(listOfProducts);
