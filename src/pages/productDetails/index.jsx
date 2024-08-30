@@ -4,7 +4,7 @@ import { ShoppingCartContext } from '../../context';
 
 function ProductDetailPage() {
 
-  const { productDetails, setProductDetails, setLoading, loading ,handleAddToCart} = useContext(ShoppingCartContext);
+  const { productDetails, setProductDetails, setLoading, loading ,handleAddToCart,cartItem} = useContext(ShoppingCartContext);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -67,8 +67,10 @@ function ProductDetailPage() {
               <p className='text-xl font-bold'>${productDetails?.price}</p>
             </div>
             <div>
-              <button onClick={()=>handleAddToCart(productDetails)}
-                className='mt-5 min-w-[200px] px-4 py-3 border border-[#333] bg-transparent text-sm text-semibold rounded'>
+              <button
+                disabled={cartItem?.findIndex(cartItem=>cartItem.id===productDetails.id)>-1}
+                onClick={() => handleAddToCart(productDetails)}
+                className='disabled:opacity-65 mt-5 min-w-[200px] px-4 py-3 border border-[#333] bg-transparent text-sm text-semibold rounded'>
                 Add to cart
               </button>
             </div>
