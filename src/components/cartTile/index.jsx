@@ -2,8 +2,8 @@ import React, { Fragment, useContext } from 'react';
 import { ShoppingCartContext } from '../../context';
 
 function CartTile({ singleCartItem }) {
-    const { handleRemoveFromCart } = useContext(ShoppingCartContext);
-    console.log(singleCartItem?.quantity);
+    const { handleRemoveFromCart,handleAddToCart } = useContext(ShoppingCartContext);
+   
     
     return (
       <Fragment>
@@ -21,7 +21,9 @@ function CartTile({ singleCartItem }) {
                     className='text-base font-bold text-gray-900'>
                     {singleCartItem?.title}
                   </h3>
-                  <button onClick={()=>handleRemoveFromCart(singleCartItem,true)} className='px-4 py-3 text-sm font-extrabold text-white bg-black'>
+                        <button
+                            onClick={() => handleRemoveFromCart(singleCartItem, true)}
+                            className='px-4 py-3 text-sm font-extrabold text-white bg-black'>
                       REMOVE
                   </button>
                  
@@ -32,9 +34,14 @@ function CartTile({ singleCartItem }) {
                   ${
                   singleCartItem?.totalprice?.toFixed(2)
                   }
-              </h3>
+                    </h3>
+                    <p className='mt-2 mb-3 font-bold text-[16px]'>Quantity: { singleCartItem?.quantity}</p>
               <div className='mt-3'>
-                  <button className='border border-[#000]'>+</button>
+                        <button
+                            onClick={()=>handleAddToCart(singleCartItem)}
+                            className='border border-[#000]'
+                        >+
+                        </button>
                         <button
                             onClick={() => handleRemoveFromCart(singleCartItem, false)}
                             className='disabled:opacity-65 border border-[#000]'

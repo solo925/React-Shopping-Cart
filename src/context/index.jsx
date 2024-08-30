@@ -23,7 +23,13 @@ function ShoppingCartProvider({ children }) {
                 totalprice: getProductDetails?.price
             });
         } else {
-            console.log('do something');
+            cpyExistingStateItems[findIndexOfCurrentItem] = {
+                ...cpyExistingStateItems[findIndexOfCurrentItem],
+                quantity: cpyExistingStateItems[findIndexOfCurrentItem].quantity + 1,
+                totalprice: (cpyExistingStateItems[findIndexOfCurrentItem].quantity +1) * cpyExistingStateItems[findIndexOfCurrentItem].price,
+            };
+
+           
         }
 
         setCartItem(cpyExistingStateItems);
@@ -72,6 +78,7 @@ function ShoppingCartProvider({ children }) {
             handleAddToCart,
             cartItem,
             handleRemoveFromCart,
+            handleAddToCart,
         }}>
             {children}
         </ShoppingCartContext.Provider>
