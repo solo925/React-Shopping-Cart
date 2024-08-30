@@ -1,6 +1,10 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
+import { ShoppingCartContext } from '../../context';
 
-function CartTile({singleCartItem}) {
+function CartTile({ singleCartItem }) {
+    const { handleRemoveFromCart } = useContext(ShoppingCartContext);
+    console.log(singleCartItem?.quantity);
+    
     return (
       <Fragment>
       <div className='grid grid-cols-3 gap-5 items-start'>
@@ -13,10 +17,11 @@ function CartTile({singleCartItem}) {
                   />
               </div>
               <div> 
-                <h3 className='text-base font-bold text-gray-900'>
+                <h3
+                    className='text-base font-bold text-gray-900'>
                     {singleCartItem?.title}
                   </h3>
-                  <button className='px-4 py-3 text-sm font-extrabold text-white bg-black'>
+                  <button onClick={()=>handleRemoveFromCart(singleCartItem,true)} className='px-4 py-3 text-sm font-extrabold text-white bg-black'>
                       REMOVE
                   </button>
                  
@@ -25,12 +30,17 @@ function CartTile({singleCartItem}) {
           <div className='ml-auto'> 
               <h3 className='text-lg font-bold text-gray-900'>
                   ${
-                  singleCartItem?.totalprice.toFixed(2)
+                  singleCartItem?.totalprice?.toFixed(2)
                   }
               </h3>
               <div className='mt-3'>
                   <button className='border border-[#000]'>+</button>
-                  <button className='border border-[#000]' >-</button>
+                        <button
+                            onClick={() => handleRemoveFromCart(singleCartItem, false)}
+                            className='disabled:opacity-65 border border-[#000]'
+                            disabled={singleCartItem?.quantity===1}>
+                            -
+                        </button>
               </div>
           </div>
          
